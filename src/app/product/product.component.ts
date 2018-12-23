@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((res) => {
       this.rest.get(
-        `http://localhost:3030/api/product/${res['id']}`
+        `/api/product/${res['id']}`
       ).then((data) => {
         data['success'] 
         ? (this.product = data['product'])
@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
     this.btnDisabled = true;
     try {
       const data = await this.rest.post(
-        'http://localhost:3030/api/review',
+        '/api/review',
         {
           productId: this.product._id,
           title: this.myReview.title,

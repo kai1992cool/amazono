@@ -31,7 +31,7 @@ export class PostProductComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        'http://localhost:3030/api/categories'
+        '/api/categories'
       );
       data['success']
         ? this.categories = data['categories']
@@ -74,7 +74,7 @@ export class PostProductComponent implements OnInit {
     try {
       if (this.validate(this.product)) {
         const data = await this.rest.post(
-          'http://localhost:3030/api/seller/products',
+          '/api/seller/products',
           this.product
         );
         data['success']

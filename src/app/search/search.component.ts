@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
     this.content = null;
     try {
       const data = await this.rest.get(
-        `http://localhost:3030/api/search?query=${this.query}&page=${this.page - 1}`
+        `/api/search?query=${this.query}&page=${this.page - 1}`
       );
       data['success']
       ? (this.content = data['content'])

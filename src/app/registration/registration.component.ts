@@ -51,7 +51,7 @@ btnDisabled = false;
     try {
       if(this.validate()) {
         const data =  await this.rest.post(
-          'http://localhost:3030/api/accounts/signup',
+          '/api/accounts/signup',
           {
             name: this.name,
             email: this.email,
