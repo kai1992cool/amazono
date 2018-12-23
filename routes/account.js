@@ -23,7 +23,7 @@ router.post('/signup', (req, res, next) => {
         } else {
             user.save();
             var token = jwt.sign({
-                user: existingUser
+                user: user
             }, config.secret, {
                 expiresIn: '7d'
             });
@@ -96,6 +96,7 @@ router.route('/profile')
 
 router.route('/address')
 .get(checkJWT, (req, res) => {
+    console.log(req.decoded);
     User.findOne({ _id: req.decoded.user._id }, (err, user) => {
         res.json({
             success: true,

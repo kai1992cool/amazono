@@ -22,8 +22,6 @@ export class SettingsComponent implements OnInit {
         newPwd: '',
         pwdConfirm: ''
       }, this.data.user);
-      console.log(this.data.user);
-      console.log(this.currentSettings);
     }catch(error) {
       this.data.error(error['message']);
     }

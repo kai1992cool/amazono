@@ -14,19 +14,23 @@
         <div class="col-lg-5">
           <div class="row">
             <div class="col-6">
-              <h4>{{product.title}}</h4>
+              <h4>{{product.title | titlecase}}</h4>
               <p class="m-0">
-                <small>by {{product.owner.name}}</small>
+                <small>by {{product.owner.name | titlecase}}</small>
               </p>
               <p class="m-0">
-                <small class="text-muted">{{product.category.name}}</small>
+                <small class="text-muted">{{product.category.name | titlecase}}</small>
               </p>
             </div>
             <div class="col-6">
               <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
             </div>
-            <hr>
-            <p class="lead">{{product.description}}</p>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <hr>
+              <p class="lead">{{product.description | titlecase}}</p>
+            </div>
           </div>
         </div>
         <div class="col-lg-3">
@@ -44,20 +48,21 @@
         <div class="mt-5 ml-lg-5">
           <h4>Reviews</h4>
           <hr>
-          <div class="reviews">
+          <h3 *ngIf="!product.reviews.length" class="display-5 text-center mt-3">No Reviews</h3>
+          <div class="reviews" *ngIf="product.reviews.length">
             <div *ngFor="let review of product.reviews" class="review">
               <div class="p-3">
                 <img [src]="review.owner.picture" alt="poster" width="75" class="rounded-circle">
-                <p class="lead d-inline ml-3">{{review.owner.name}}</p>
+                <p class="lead d-inline ml-3">{{review.owner.name | titlecase}}</p>
                 <br><br>
                 <ngb-rating [(rate)]="review.rating" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
-                <p class="ml-2 d-inline font-weight-bold">{{review.title}}</p>
-                <p class="mt-3">{{review.description}}</p>
+                <p class="ml-2 d-inline font-weight-bold">{{review.title | titlecase}}</p>
+                <p class="mt-3">{{review.description | titlecase}}</p>
               </div>
               <hr>
             </div>
           </div>
-          <div class="card bg-light my-5">
+          <div class="card bg-light my-5" *ngIf="token">
             <div class="card-body">
               <h4 class="card-title">Add a Review</h4>
               <hr>

@@ -52,16 +52,16 @@ router.route('/categories')
                 categories: categories
             });
         });
-    })
-    .post((req,res,next) => {
-        let category = new Category();
-        category.name = req.body.category;
-        category.save();
-        res.json({
-            success: true,
-            message: "Successful"
-        });
     });
+router.post('/categories', checkJWT, (req,res,next) => {
+    let category = new Category();
+    category.name = req.body.category;
+    category.save();
+    res.json({
+        success: true,
+        message: "Successful"
+    });
+});
 
 router.get('/categories/:id', (req, res, next) => {
     const perPage = 10;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { HostListener, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
@@ -15,6 +15,11 @@ export class LoginComponent implements OnInit {
   btnDisabled=false;
 
   constructor(private router: Router, private data: DataService, private rest: RestApiService) { }
+
+  @HostListener('window:keydown.enter', ['$event'])
+  keyEvent() {
+    this.login();
+  }
 
   ngOnInit() {
   }

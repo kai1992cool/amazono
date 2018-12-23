@@ -23,7 +23,6 @@ export class AddressComponent implements OnInit {
       ) {
         this.data.warning('You have not entered your shipping address. Please enter your shipping address.');
       }
-      console.log(data);
       this.currentAddress = data['address'];
     } catch(error) {
       this.data.error(error['message']);

@@ -8,7 +8,7 @@
       </button>
       <div [ngbCollapse]="isCollapsed" style="align-items: left; margin-left: 50px;" class="collapse navbar-collapse flex-column"
         id="navbarNav">
-        <div class="input-group w-75">
+        <div class="input-group w-75 mr-auto">
           <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
           <span id="searchBtn" class="bg-warning" (click)="search()">
             <i class="fa fa-search"></i>
@@ -22,8 +22,9 @@
             <li class="nav-item ml-0 ml-md-auto" ngbDropdown #dropdown="ngbDropdown">
               <a class="nav-link dropdown-toggle" ngbDropdownToggle>
                 <i class="fa fa-user mr-1"></i>
+                <!-- <img *ngIf="userData.user.picture" src="{{userData.user.picture || ''}}" id="userImageSmall" class="mr-1">  -->
                 <span *ngIf="!token">Accounts</span>
-                <span *ngIf="userData.user">{{userData.user.name}}</span>
+                <span *ngIf="userData.user">{{userData.user.name | titlecase}}</span>
               </a>
               <div ngbDropdownMenu class="dropdown-menu">
                 <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();" routerLink="/profile" class="dropdown-item">

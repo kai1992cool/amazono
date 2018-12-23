@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Product = require('../models/product');
+const Category = require('../models/category');
 
 const checkJWT  = require('../middlewares/check-jwt');
 
@@ -26,7 +27,7 @@ router.route('/products')
         product.title = req.body.title;
         product.price = req.body.price;
         product.description = req.body.description;
-        product.image = 'https://via.placeholder.com/300';
+        product.image = 'http://placekitten.com/300/300';
         product.save();
         res.json({
             success: true,
@@ -35,12 +36,17 @@ router.route('/products')
     });
 
 /*Just for testing*/
-router.get('/faker/test', (req,res,next) => {
+router.get('/faker/test', async (req,res,next) => {
+    console.log("obj id");
+    var categoryId = null;
+    await Category.findOne({name: 'uncategorized'}, function (err, data) {
+        categoryId = data._id;
+    });
     for (let i = 0; i < 20; i++) {
         let product = new Product();
-        product.category = '5c1108ffc1bd8e113c64c0c6';
-        product.owner = '5c0b3019da58f12824fd3735';
-        product.image = 'https://via.placeholder.com/300';
+        product.category = categoryId;
+        product.owner = '5c1fc3ae91c92132d834b405';
+        product.image = 'http://placekitten.com/300/300';
         product.title = faker.commerce.productName();
         product.description = faker.lorem.words();
         product.price = faker.commerce.price();

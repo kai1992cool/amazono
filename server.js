@@ -10,16 +10,24 @@ const http = require('http');
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-mongoose.connect(config.database, (err) => {
+mongoose.connect(config.database, (err, client) => {
   if(err) {
       console.log(err);
   } else {
       console.log("connected to database");
+      const Category = client.models.Category;
+      Category.findOne({name: 'uncategorized'}).exec(function(err, docs) {
+        if (!docs){
+          let category = new Category();
+          category.name = 'uncategorized';
+          category.save();
+        }
+      });
   }
 }); 
 
@@ -27,15 +35,6 @@ app.use(bodyParser.json({ limit: '50MB' }));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(morgan('dev'));
 app.use(cors());
-
-console.log("Using node server");
-var Client = require('node-rest-client').Client;
-
-// app.get('/server_api/api/v1/rivers', function(req, res) {
-//   client.get("http://riverbrain.com/api/v1/rivers", function (data, response) {
-//       res.send(data);
-//   }); 
-// });
 
 const userRoutes = require('./routes/account');
 const mainRoutes = require('./routes/main');
@@ -49,7 +48,7 @@ app.use('/api/search', productSearchRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/AngularAmazono/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 /**

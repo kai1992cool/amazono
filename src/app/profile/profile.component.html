@@ -12,7 +12,7 @@
         <img src="{{user.user.picture}}" alt="userimage" class="rounded-circle image">
       </div>
       <div class="col-md-8 ml-3">
-        <p id="name" class="lead">{{user.user.name}}</p>
+        <p id="name" class="lead">{{user.user.name | titlecase}}</p>
         <a routerLink="/profile/orders" class="btn btn-warning">MyOrders</a>
         <br>
         <br>

@@ -38,6 +38,10 @@ export class ProductComponent implements OnInit {
     })
   }
 
+  get token() {
+    return localStorage.getItem('token');
+  }
+
   async postReview() {
     this.btnDisabled = true;
     try {

@@ -18,6 +18,11 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
     this.getCategories.bind(this)();
   }
+
+  get token() {
+    return localStorage.getItem('token');
+  }
+
   async getCategories() {
     try {
       const data = await this.rest.get(
