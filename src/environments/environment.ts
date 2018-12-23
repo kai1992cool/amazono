@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  stripeKey: 'pk_test_b4pznFopX44ROwNzIx6IHRdN',
-  serverURL: 3001
+  stripeKey: 'pk_test_b4pznFopX44ROwNzIx6IHRdN'
 };
 
 /*
